@@ -30,7 +30,6 @@ function buildNavigation() {
     if (!section.dataset || !section.dataset.nav) {
       return;
     }
-    console.log(section.dataset);
     let navItem = document.createElement("li");
     navItem.innerText = section.dataset.nav;
     navItem.className = "menu__link";
@@ -43,6 +42,7 @@ function buildNavigation() {
     };
     navbar.appendChild(navItem);
   });
+  navbar.childNodes[0].classList.add("navbar-active");
 }
 
 function myFunction() {
@@ -53,9 +53,6 @@ function myFunction() {
   }
 }
 
-// Add class 'active' to section when near top of viewport
-
-// Scroll to anchor ID using scrollTO event
 function scrollTo(target) {
   /** scroll without using jQuery
     document.getElementById(target).scrollIntoView();
@@ -68,32 +65,32 @@ function scrollTo(target) {
   );
 }
 
-/**
- * End Main Functions
- * Begin Events
- *
- */
-
-//window.onscroll = () => myFunction();
-// Build menu
-buildNavigation();
-scrollActive();
-//scrollActive();
-function checkView(elem) {
-  console.log("Verificat");
+// Classic function to check element is in viewport
+function isInViewport(elem) {
   const bounding = elem.getBoundingClientRect();
   return bounding.top >= 0 && bounding.left >= 0 && bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) && bounding.right <= (window.innerWidth || document.documentElement.clientWidth);
 }
 
 function scrollActive() {
-  sections.forEach(section => {
-    if (checkView(section)) {
-      console.log("Sunt in view");
-      section.classList.add("section-active");
-      $(`#${section.id}`).addClass("navbar-active");
-    }
-  });
+  // get the index of section, if its h2 element is in viewport
+  const idx = sections.findIndex(section => isInViewport(section.childNodes[1].childNodes[1]));
+  // if no specific h2 is in viewport, -1 is returned
+  if (idx >= 0) {
+    // fetch the active section and its resective nav elements
+    const activeSection = sections[idx];
+    activeLink = navbar.childNodes[idx];
+    // set active classes for them and remove for all other indexes
+    activeSection && activeSection.classList.add("section-active");
+    activeLink && activeLink.classList.add("navbar-active");
+    navbar.childNodes.forEach((e, i) => i !== idx && e.classList.remove("navbar-active"));
+    sections.forEach((e, i) => i !== idx && e.classList.remove("section-active"));
+  }
 }
+
+/**
+ * End Main Functions
+ * Begin Events
+ *
+ */
+buildNavigation();
 window.onscroll = scrollActive;
-// Scroll to section on link click
-// Set sections as active

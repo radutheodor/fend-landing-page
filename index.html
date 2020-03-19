@@ -5,17 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Manipulating the DOM</title>
-    <!-- Load Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans:900|Merriweather&display=swap" rel="stylesheet" />
-    <!-- Load Styles -->
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body>
-    <!-- HTML Follows BEM naming conventions 
-  IDs are only used for sections to connect menu achors to sections -->
     <header class="page__header">
       <nav class="navbar__menu">
-        <!-- Navigation starts as empty UL that will be populated with JS -->
         <ul id="navbar__list"></ul>
       </nav>
     </header>
@@ -23,11 +18,7 @@
       <header class="main__hero">
         <h1>Landing Page</h1>
       </header>
-      <!-- Each Section has an ID (used for the anchor) and 
-    a data attribute that will populate the li node.
-    Adding more sections will automatically populate nav.
-    The first section is set to active class by default -->
-      <section id="home" data-nav="Home" class="section-active">
+      <section id="home" data-nav="Home" class="section">
         <div class="landing__container">
           <h2>Home</h2>
           <p>
@@ -42,7 +33,7 @@
           </p>
         </div>
       </section>
-      <section id="about" data-nav="About us">
+      <section id="about" data-nav="About us" class="section">
         <div class="landing__container">
           <h2>About Us</h2>
           <p>
@@ -57,7 +48,7 @@
           </p>
         </div>
       </section>
-      <section id="projects" data-nav="Projects">
+      <section id="projects" data-nav="Projects" class="section">
         <div class="landing__container">
           <h2>Projects</h2>
           <p>
@@ -72,7 +63,7 @@
           </p>
         </div>
       </section>
-      <section id="testimonials" data-nav="Testimonials">
+      <section id="testimonials" data-nav="Testimonials" class="section">
         <div class="landing__container">
           <h2>Testimonials</h2>
           <p>
